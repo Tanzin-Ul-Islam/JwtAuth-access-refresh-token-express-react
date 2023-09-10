@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 dotenv.config();
 class BcryptService {
@@ -15,7 +15,6 @@ class BcryptService {
         const compare = bcrypt.compareSync(password, hashPass)
         return compare;
     }
-
 }
 
 export default new BcryptService;
