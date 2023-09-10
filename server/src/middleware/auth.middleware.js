@@ -1,4 +1,4 @@
-import JwtAuthService from "../service/jwt.service.js";
+import JwtAuthService from "../core/common/jwt/jwt.service.js";
 import UserRepository from "../module/user/user.repository.js";
 class AuthMiddleware {
     async authGuardMiddleware(req, res, next) {
