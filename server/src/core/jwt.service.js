@@ -21,7 +21,7 @@ class JwtAuthService {
     }
     decodeJwtRefreshToken(token) {
         try {
-            const response = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
+            const response = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
             return response;
         } catch (error) {
             return;

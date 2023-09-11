@@ -69,6 +69,38 @@ class AuthService {
             return
         }
     }
+    async regenerateAccessToken(req, res) {
+        const cookie = req.headers.cookie;
+        if (!cookie) {
+            res.status(400).send({ statusCode: 400, message: "Unauthorized!" });
+            return;
+        }
+        const refreshToken = req.headers.cookie.split('=')[1];
+        const refreshTokenExist = await AuthRepository.findByToken(refreshToken);
+        if (!refreshTokenExist) {
+            res.status(400).send({ statusCode: 400, message: "Invalid token" });
+            return;
+        }
+        const decodeToken = JwtService.decodeJwtRefreshToken(refreshToken);
+        if (refreshTokenExist && !decodeToken) {
+            await AuthRepository.deleteToken(refreshToken);
+            res.status(400).send({ statusCode: 400, message: "token expired" });
+            return;
+        }
+        const user = UserRepository.findByEmail(decodeToken.email);
+        if (!user) {
+            res.status(400).send({ statusCode: 400, message: "Invalid user" });
+            return;
+        }
+        const jwtPayload = {
+            id: user.id,
+            username: user.username,
+            email: user.email
+        }
+        const jwtAccessToken = JwtService.generateAccessToken(jwtPayload);
+        res.status(200).send({ statusCode: 200, message: 'Token created successfully', token: jwtAccessToken });
+        return;
+    }
 }
 
 export default new AuthService;
