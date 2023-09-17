@@ -1,0 +1,9 @@
+{
+    "auth": {
+        "signUp": "/auth/sign-up",
+        "signIn": "/auth/sign-in"
+    },
+    "user": {
+        "getAllUserUrl": "/user/all"
+    }
+}

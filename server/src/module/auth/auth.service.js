@@ -62,7 +62,7 @@ class AuthService {
             const { jwtAccessToken, jwtRefreshToken } = JwtService.generateJwtTokens(jwtPayload);
             await AuthRepository.createRefreshToken({ token: jwtRefreshToken, userId: user.id });
             res.cookie('refreshToken', jwtRefreshToken, { httpOnly: true, sameSite: 'none', secure: true });
-            res.status(200).send({ message: "Successfully Registered!", user: UserTransformer(user), token: jwtAccessToken });
+            res.status(200).send({ message: "Successfully Login!", user: UserTransformer(user), token: jwtAccessToken });
             return;
         } catch (error) {
             res.status(400).send({ statusCode: 400, message: "Something went wrong! Please try again." });
