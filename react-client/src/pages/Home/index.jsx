@@ -65,7 +65,7 @@ export default function Home() {
                     <td class="px-6 py-4">
                       {el.createAt}
                     </td>
-                    
+
                   </tr>
                 )
               }) : <>No User Found</>
