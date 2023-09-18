@@ -1,8 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import api from "../../config/api.json";
-import axios from 'axios';
+import axios from '../../config/axios.config';
 import { Link, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import SweetToast from '../../utils/sweetToast';
 import { DataContext } from '../../contextApi/DataProvider';
 export default function SignIn() {

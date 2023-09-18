@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import api from "../../config/api.json";
-import axios from 'axios';
+import axios from '../../config/axios.config';
 import { Link, useNavigate } from 'react-router-dom';
 import { DataContext } from '../../contextApi/DataProvider';
 import SweetToast from '../../utils/sweetToast';

@@ -5,5 +5,6 @@ const router = express.Router();
 router.post('/sign-up', AuthService.signUp);
 router.post('/sign-in', AuthService.signIn);
 router.get('/regenerate-access-token', AuthService.regenerateAccessToken);
+router.delete('/logout', AuthService.logout)
 
 export default router;

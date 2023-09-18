@@ -101,6 +101,25 @@ class AuthService {
         res.status(200).send({ statusCode: 200, message: 'Token created successfully', token: jwtAccessToken });
         return;
     }
+    async logout(req, res) {
+        try {
+            const cookie = req.headers.cookie;
+            if (!cookie) {
+                res.status(400).send({ statusCode: 400, message: "Unauthorized!" });
+                return;
+            }
+            const refreshToken = req.headers.cookie.split('=')[1];
+            const result = await AuthRepository.deleteToken(refreshToken);
+            if (!result) {
+                res.status(400).send({ statusCode: 400, message: "No token found!" });
+                return;
+            }
+            res.status(200).send({ statusCode: 200, message: "Successfully logout!" });
+            res.clearCookie('refreshToken');
+        } catch (error) {
+            return;
+        }
+    }
 }
 
 export default new AuthService;

@@ -7,9 +7,12 @@ import AuthRouter from "./src/module/auth/auth.router.js";
 dotenv.config();
 
 const app = express();
-app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+}));
 
 app.use("/auth", AuthRouter);
 app.use("/user", UserRouter);
