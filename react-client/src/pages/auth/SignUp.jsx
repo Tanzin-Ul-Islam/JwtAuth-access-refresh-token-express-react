@@ -40,8 +40,10 @@ export default function SignUp() {
         }
     }
     useEffect(() => {
-
-    }, [])
+        if (token) {
+            navigate('/')
+        }
+    }, [token])
     return (
         <>
             <div className="bg-blue-100 h-screen flex items-center">

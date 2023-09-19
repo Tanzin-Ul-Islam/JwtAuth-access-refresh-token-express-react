@@ -38,8 +38,10 @@ export default function SignIn() {
         }
     }
     useEffect(() => {
-
-    }, [])
+        if (token) {
+            navigate('/')
+        }
+    }, [token])
     return (
         <div className="bg-blue-100 h-screen flex items-center">
             <form className='w-64 mx-auto mb-12' onSubmit={handleSubmit}>

@@ -27,8 +27,10 @@ export default function Home() {
     navigate('/sign-in')
   }
   useEffect(() => {
-    getUsers()
-  }, [])
+    if (token) {
+      getUsers()
+    }
+  }, [token])
   return (
     <div class="container mx-auto p-4">
       <div className='flex justify-between'>

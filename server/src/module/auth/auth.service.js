@@ -87,7 +87,7 @@ class AuthService {
             res.status(400).send({ statusCode: 400, message: "token expired" });
             return;
         }
-        const user = UserRepository.findByEmail(decodeToken.email);
+        const user = await UserRepository.findByEmail(decodeToken.email);
         if (!user) {
             res.status(400).send({ statusCode: 400, message: "Invalid user" });
             return;
