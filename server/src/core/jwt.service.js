@@ -3,11 +3,11 @@ import dotenv from "dotenv";
 dotenv.config();
 class JwtAuthService {
     generateAccessToken(arg) {
-        const token = jwt.sign(arg, process.env.JWT_ACCESS_SECRET, { expiresIn: '1m' });
+        const token = jwt.sign(arg, process.env.JWT_ACCESS_SECRET, { expiresIn: '1h' });
         return token;
     }
     generateRefreshToken(arg) {
-        const token = jwt.sign(arg, process.env.JWT_REFRESH_SECRET, { expiresIn: '4m' });
+        const token = jwt.sign(arg, process.env.JWT_REFRESH_SECRET, { expiresIn: '4h' });
         return token;
     }
 
