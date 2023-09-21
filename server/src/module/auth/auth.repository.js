@@ -27,6 +27,7 @@ class AuthRepository {
             if (token) {
                 let sql = 'DELETE FROM refresh_token WHERE token = ?';
                 let result = await db.query(sql, [token]);
+                return result;
             }
             return;
         } catch (error) {

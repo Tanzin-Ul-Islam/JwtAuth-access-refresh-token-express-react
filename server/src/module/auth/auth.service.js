@@ -78,13 +78,13 @@ class AuthService {
         const refreshToken = req.headers.cookie.split('=')[1];
         const refreshTokenExist = await AuthRepository.findByToken(refreshToken);
         if (!refreshTokenExist) {
-            res.status(400).send({ statusCode: 400, message: "Invalid token" });
+            res.status(401).send({ statusCode: 401, message: "Invalid token" });
             return;
         }
         const decodeToken = JwtService.decodeJwtRefreshToken(refreshToken);
         if (refreshTokenExist && !decodeToken) {
             await AuthRepository.deleteToken(refreshToken);
-            res.status(400).send({ statusCode: 400, message: "token expired" });
+            res.status(401).send({ statusCode: 401, message: "token expired" });
             return;
         }
         const user = await UserRepository.findByEmail(decodeToken.email);
@@ -101,7 +101,7 @@ class AuthService {
         res.status(200).send({ statusCode: 200, message: 'Token created successfully', token: jwtAccessToken });
         return;
     }
-    async logout(req, res) {
+    async signOut(req, res) {
         try {
             const cookie = req.headers.cookie;
             if (!cookie) {
@@ -110,12 +110,8 @@ class AuthService {
             }
             const refreshToken = req.headers.cookie.split('=')[1];
             const result = await AuthRepository.deleteToken(refreshToken);
-            if (!result) {
-                res.status(400).send({ statusCode: 400, message: "No token found!" });
-                return;
-            }
-            res.status(200).send({ statusCode: 200, message: "Successfully logout!" });
             res.clearCookie('refreshToken');
+            res.status(200).send({ statusCode: 200, message: "Successfully logout!" });
         } catch (error) {
             return;
         }

@@ -2,9 +2,11 @@
     "auth": {
         "signUp": "/auth/sign-up",
         "signIn": "/auth/sign-in",
+        "signout":"/auth/sign-out",
         "regenerateAccessToken":"/auth/regenerate-access-token"
     },
     "user": {
-        "getAllUserUrl": "/user/all"
+        "getAllUserUrl": "/user/all",
+        "profile":"/user/profile"
     }
 }
